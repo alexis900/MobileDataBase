@@ -1,0 +1,13 @@
+
+.first_div_list_brand {
+  overflow: auto;
+  float: left;
+  margin: 20px;
+}
+
+.first_div_list_brand > .image_logo_brand {
+  color: #fff;
+  background-repeat: no-repeat;
+  width: 360px;
+  height: 360px;
+  }
