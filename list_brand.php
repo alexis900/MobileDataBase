@@ -9,7 +9,8 @@
 <body>
     <?php include './include/nav.php';
 
-include './database.php';
+include './include/database.php';
+
 
 $sql = "SELECT * FROM brand";
 $result = $conn->query($sql);
@@ -20,14 +21,15 @@ if ($result->num_rows > 0) {
   <?php
     echo "
     <div class='first_div_list_brand'>
-      <div style='background:url(".$row['logo'].")' class='image_logo_brand'>
+      <div style='background:url(".$row['logo']."); background-repeat: no-repeat; background-size: 100%;' class='image_logo_brand'>
         <h2>" . $row['brand']."</h2>
         </div>
       <div>
         " . $row['description']. "
       </div>
       <div>
-        <a href='#'>Read more</a>
+        <a href='./ibrand.php?id=" . $row['id'] . "'>Read more</a>
+        <a href='./dbrand.php?id=" . $row['id']. "'>Delete</a>
       </div>
       </div>";
     }

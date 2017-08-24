@@ -7,16 +7,18 @@
   <body>
     <?php include './include/nav.php'; ?>
 
-    <main class="mdl-layout__content">
-        <div class="page-content">
+    <main>
+        <div>
 <?php
-include './database.php';
+include './include/database.php';
 
 if (isset($_FILES) & !empty($_FILES)) {
   $logo_name = $_FILES['logo']['name'];
   $logo_type = $_FILES['logo']['type'];
   $logo_tmp_name = $_FILES['logo']['tmp_name'];
   $logo_size = $_FILES['logo']['size'];
+
+  $logo_default = "./images/logo-default.png";
 }
 $location = "./logo_upload/";
 $maxsize = 100000;
@@ -35,7 +37,13 @@ if (isset($_POST['brand_submit'])) {
   $brand = $_POST['brand'];
   $description = $_POST['description'];
 
-  $sql = "INSERT INTO brand (id, brand, description, logo) VALUES ('', '$brand', '$description', '$location$logo_name')";
+  if (!empty($logo_name)) {
+    $sql = "INSERT INTO brand (id, brand, description, logo) VALUES ('', '$brand', '$description', '$location$logo_name')";
+  } else {
+    $sql = "INSERT INTO brand (id, brand, description, logo) VALUES ('', '$brand', '$description', '$logo_default')";
+  }
+
+
 
   if ($conn->query($sql) === TRUE) {
     echo "The brand " . $brand . " has added";
